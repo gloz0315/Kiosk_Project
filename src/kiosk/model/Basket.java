@@ -21,4 +21,35 @@ public class Basket {
         return basketInfo;
     }
 
+    public boolean isEmpty() {
+        return buyInfo.isEmpty();
+    }
+
+    public boolean containItem(Item itemInfo) {
+        for(Item item : buyInfo.keySet()) {
+            if(item.getName().equals(itemInfo.getName()) && item.itemPrice() == item.itemPrice())
+                return true;
+        }
+
+        return false;
+    }
+
+    public void addItem(Item itemInfo, int count) {
+        buyInfo.put(itemInfo, count);
+    }
+
+    public double getTotalPrice() {
+        double totalPrice = 0.0;
+
+        for(Map.Entry<Item,Integer> item : buyInfo.entrySet()) {
+            totalPrice += item.getKey().itemPrice() * item.getValue();
+        }
+
+        return totalPrice;
+    }
+
+    public void clearBasket() {
+        buyInfo.clear();
+    }
+
 }

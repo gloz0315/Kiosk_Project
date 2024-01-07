@@ -19,4 +19,32 @@ public class Database {
 
         return databaseInfo;
     }
+
+    public boolean isEmpty() {
+        return sellInfo.isEmpty();
+    }
+
+    public boolean containItem(Item itemInfo) {
+        for (Item item : sellInfo.keySet()) {
+            if(item.getName().equals(itemInfo.getName()) && item.itemPrice() == itemInfo.itemPrice())
+                return true;
+        }
+
+        return false;
+    }
+
+    public void addItem(Item itemInfo, int count) {
+        sellInfo.put(itemInfo, count);
+    }
+
+
+    public double getTotalPrice() {
+        double totalPrice = 0.0;
+
+        for(Map.Entry<Item,Integer> item : sellInfo.entrySet()) {
+            totalPrice += item.getKey().itemPrice() * item.getValue();
+        }
+
+        return totalPrice;
+    }
 }
