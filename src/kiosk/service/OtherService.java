@@ -70,14 +70,12 @@ public class OtherService {
     }
 
     private void putDataBase() {
-        // database에 산 정보들을 넣기
         for(Map.Entry<Item,Integer> items : Basket.getInstance().getBasket().entrySet()) {
             if(!Database.getInstance().containItem(items.getKey(),items.getValue())) {
                 Database.getInstance().addItem(items.getKey(), items.getValue());
             }
         }
 
-        // 장바구니는 이제 정리
         Basket.getInstance().clearBasket();
     }
 
