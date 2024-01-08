@@ -37,25 +37,11 @@ public class MainController {
         Category category = Category.getCategoryInfo(number);
 
         switch(category) {
-            case BURGERTYPE,ICECREAMTYPE,DRINKTYPE,FRIEDTYPE: {
+            case BURGERTYPE,ICECREAMTYPE,DRINKTYPE,FRIEDTYPE ->
                 menuService.menuServiceRun(category);
-            }
-            break;
-            case ORDERTYPE: {
-                otherService.orderMenu();
-            }
-            break;
-            case CANCELTYPE: {
-                otherService.cancelMenu();
-            }
-            break;
-            case SALESTYPE: {
-                otherService.sellMenu();
-            }
-            break;
-
-            default:
-                break;
+            case ORDERTYPE -> otherService.orderMenu();
+            case CANCELTYPE -> otherService.cancelMenu();
+            case SALESTYPE -> otherService.sellMenu();
         }
     }
 }
