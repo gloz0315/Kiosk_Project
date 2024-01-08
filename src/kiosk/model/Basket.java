@@ -26,11 +26,12 @@ public class Basket {
     }
 
     public boolean containItem(Item itemInfo) {
-        for(Item item : buyInfo.keySet()) {
-            if(item.getName().equals(itemInfo.getName()) && item.itemPrice() == item.itemPrice())
+        for(Map.Entry<Item,Integer> item : buyInfo.entrySet()) {
+            if(item.getKey().getName().equals(itemInfo.getName()) && item.getKey().itemPrice() == itemInfo.itemPrice()) {
+                buyInfo.replace(item.getKey(),item.getValue(), item.getValue() + 1);
                 return true;
+            }
         }
-
         return false;
     }
 
@@ -50,6 +51,10 @@ public class Basket {
 
     public void clearBasket() {
         buyInfo.clear();
+    }
+
+    public Map<Item,Integer> getBasket() {
+        return buyInfo;
     }
 
 }

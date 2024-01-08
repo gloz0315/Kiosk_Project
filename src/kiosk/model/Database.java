@@ -7,6 +7,7 @@ import java.util.Map;
 public class Database {
     private static Database databaseInfo;
     private final Map<Item,Integer> sellInfo;
+    private int waitingNumber = 1;
 
     private Database() {
         sellInfo = new HashMap<>();
@@ -24,19 +25,19 @@ public class Database {
         return sellInfo.isEmpty();
     }
 
-    public boolean containItem(Item itemInfo) {
-        for (Item item : sellInfo.keySet()) {
-            if(item.getName().equals(itemInfo.getName()) && item.itemPrice() == itemInfo.itemPrice())
+    public boolean containItem(Item itemInfo, int number) {
+        for (Map.Entry<Item,Integer> item : sellInfo.entrySet()) {
+            if(item.getKey().getName().equals(itemInfo.getName()) && item.getKey().itemPrice() == itemInfo.itemPrice()) {
+                sellInfo.replace(item.getKey(), item.getValue(), item.getValue() + number);
                 return true;
+            }
         }
-
         return false;
     }
 
     public void addItem(Item itemInfo, int count) {
         sellInfo.put(itemInfo, count);
     }
-
 
     public double getTotalPrice() {
         double totalPrice = 0.0;
@@ -46,5 +47,13 @@ public class Database {
         }
 
         return totalPrice;
+    }
+
+    public int getWaitingNumber() {
+        return waitingNumber++;
+    }
+
+    public Map<Item,Integer> getSellInfo() {
+        return sellInfo;
     }
 }

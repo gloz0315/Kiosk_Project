@@ -6,7 +6,6 @@ public class Console {
     private static Scanner scanner;
 
     public static String readLine() {
-        System.out.print("숫자를 입력하세요 > ");
         return getInstance().nextLine();
     }
 
